@@ -1,0 +1,31 @@
+pipeline {
+    agent { label 'jenkins-agent' }
+
+    tools {
+        jdk 'java21'
+        maven 'maven143'
+    }
+
+    stages {
+
+        stage("Checkout") {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'github',
+                    url: 'https://github.com/joshi122/cloud123-jav.git'
+            }
+        }
+
+        stage("Build") {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage("Test") {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+}
