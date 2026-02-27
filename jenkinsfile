@@ -30,7 +30,7 @@ pipeline {
 
         stage("SonarCloud Analysis") {
             steps {
-                withSonarQubeEnv('SonarCloud') {
+                withSonarQubeEnv('SonarCloud Token') {
                     sh '''
                     mvn clean verify sonar:sonar \
                     -Dsonar.projectKey=joshi122_cloud123-jav \
