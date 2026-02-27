@@ -27,5 +27,18 @@ pipeline {
                 sh 'mvn test'
             }
         }
+
+        stage("SonarCloud Analysis") {
+            steps {
+                withSonarQubeEnv('SonarCloud') {
+                    sh '''
+                    mvn clean verify sonar:sonar \
+                    -Dsonar.projectKey=joshi122_cloud123-jav \
+                    -Dsonar.organization=joshi122 \
+                    -Dsonar.host.url=https://sonarcloud.io
+                    '''
+                }
+            }
+        }
     }
 }
